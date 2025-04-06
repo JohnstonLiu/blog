@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "./fonts/cmun-sans.css";
+@import "./fonts/cmun-serif.css";
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --code-bg: #2d2d2d;
+  --code-text: #ccc;
+  --code-border: #404040;
+  --code-label: #666;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-serif: "Computer Modern Serif";
+  --font-sans: "Computer Modern Sans";
+  --font-mono: "Roboto Mono";
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #111827;
+    --foreground: #f3f4f6;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Customize prose styles for dark mode */
+.dark .prose {
+  --tw-prose-body: #e5e7eb;
+  --tw-prose-headings: #f9fafb;
+  --tw-prose-links: #60a5fa;
+  --tw-prose-bold: #f9fafb;
+  --tw-prose-counters: #9ca3af;
+  --tw-prose-bullets: #6b7280;
+  --tw-prose-hr: #374151;
+  --tw-prose-quotes: #e5e7eb;
+  --tw-prose-quote-borders: #4b5563;
+  --tw-prose-captions: #9ca3af;
+  --tw-prose-code: #f9fafb;
+  --tw-prose-pre-code: #e5e7eb;
+  --tw-prose-pre-bg: #1f2937;
+  --tw-prose-th-borders: #4b5563;
+  --tw-prose-td-borders: #374151;
+}

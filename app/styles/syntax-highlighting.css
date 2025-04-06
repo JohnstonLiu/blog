@@ -1,0 +1,151 @@
+/* Syntax highlighting styles for rehype-pretty-code */
+
+/* Code block base styles */
+pre {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  background-color: #1e1e1e; /* VS Code-like dark background */
+  margin: 1.5rem 0;
+  position: relative;
+  font-family: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Language indicator */
+div[data-rehype-pretty-code-fragment] {
+  overflow: hidden;
+  background-color: #1e1e1e;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+/* Target specific languages for debugging */
+[data-language="js"]::before,
+[data-language="jsx"]::before,
+[data-language="ts"]::before,
+[data-language="tsx"]::before,
+[data-language="javascript"]::before,
+[data-language="typescript"]::before,
+[data-language="html"]::before,
+[data-language="css"]::before,
+[data-language="json"]::before,
+[data-language="markdown"]::before,
+[data-language="md"]::before,
+[data-language="python"]::before,
+[data-language="py"]::before,
+[data-language="bash"]::before,
+[data-language="shell"]::before,
+[data-language="rust"]::before,
+[data-language="go"]::before,
+[data-language="c++"]::before,
+[data-language="c"]::before,
+
+div[data-rehype-pretty-code-fragment]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  left: auto;
+  font-family: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.65rem;
+  padding: 0;
+  background-color: transparent;
+  color: rgba(156, 163, 175, 0.5);
+  text-transform: capitalize;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+/* Add manual language label for fallback debugging */
+div[data-rehype-pretty-code-fragment] pre::after {
+  display: none;
+}
+
+div[data-rehype-pretty-code-fragment] pre {
+  overflow-x: auto;
+  padding: 1.75rem 1.5rem 1.5rem;
+  margin: 0;
+}
+
+div[data-rehype-pretty-code-title] {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #d4d4d4;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Code highlighting styles */
+pre {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--code-border);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+pre code {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--code-text);
+}
+
+/* Inline code */
+:not(pre) > code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.875rem;
+  color: var(--code-text);
+  background-color: var(--code-bg);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+/* Line highlighting */
+.highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 2px solid #7e57c2;
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+}
+
+/* Word highlighting */
+.word {
+  background-color: rgba(126, 87, 194, 0.3);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.2rem;
+}
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  /* Other styling */
+  display: inline-block;
+  width: 0.75rem;
+  margin-right: 2rem;
+  text-align: right;
+  color: gray;
+}
+
+code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  width: 1.25rem;
+}
+
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 1.75rem;
+}
+
+code[data-line-numbers-max-digits="4"] > [data-line]::before {
+  width: 2.25rem;
+}
