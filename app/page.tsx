@@ -59,8 +59,7 @@ export default function Home() {
         </header>
 
         <p className="text-gray-300 mb-8 px-3">
-          Chances are, you found this place through my other <a href="https://johnstonliu.me" target="_blank" className="text-white hover:text-gray-400 transition-colors duration-200">website</a>. 
-          This is my blog where I write about technical topics primarily in software engineering, and occasionally other things that interest me. Feel free to reach out with the links above if you&apos;d like to chat.
+          Chances are, you found this place through my other <a href="https://johnstonliu.me" target="_blank" className="text-white hover:text-gray-400 transition-colors duration-200">website</a>. If not, then welcome. This is my blog where I write about technical topics primarily in software engineering, and occasionally other things that interest me. Feel free to reach out with the links above if you&apos;d like to chat.
         </p>
         
         <div className="space-y-2">

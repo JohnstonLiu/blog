@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "./fonts/cmun-sans.css";
 @import "./fonts/cmun-serif.css";
+
+/* TODO: consider playing around with these constants */
 :root {
   --background: #ffffff;
   --foreground: #171717;
