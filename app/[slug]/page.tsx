@@ -11,7 +11,6 @@ import ClientMarkdown from '@/app/components/ClientMarkdown'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 // Import rehype-pretty-code and its options
 import rehypePrettyCode from 'rehype-pretty-code'
-import { Options } from 'rehype-pretty-code'
 
 // Define node type for rehype 
 interface RehypeNode {
