@@ -1,0 +1,67 @@
+---
+title: "What's the best way to handle roles & permissions?"
+description: "What is RBAC and why did we switch to it?"
+date: "2025-04-06"
+---
+
+The most intuitive approach to implementing a permission based authorization systems is to use conditional statements. In Kai, we have three roles:
+```
+"admin", "professor", "student"
+```
+These roles are quite intuitive as far as what permissions each should be allocated. For example, a user with role `admin` can do basically everything such as adding/removing any user from ALL courses. Whereas a user with role `professor` can only add/remove users from courses which they are teaching. In our database design, we only ever have users with the role `student` as formally *enrolled* in a course. Let's now consider one permission guarded action.
+## Editing Comments
+
+We want to allow users to edit and delete their own comments. 
+
+*Note: we don't actually compare userIds directly in Kai since we want to ensure anonymity of our platform. UserIds are not exposed anywhere on the client.*
+
+In our `PATCH api/comments/` controller we can put the following:
+```typescript
+if (req.user.uid === comment.userId ) {
+	// Grant access
+}
+```
+We also want to allow users with the `admin` role to be able to edit and delete any comment made by any other user.
+```typescript
+if (req.user.role ===  'admin') {
+	// Grant access
+}
+```
+Users with the `professor` role should be able to delete any comments made by users in their course. This requires multiple checks. We need to ensure that
+1. The requesting user has role `professor`
+2. The comment was posted in a course taught by this user
+```typescript
+if (req.user.role === "professor" && comment.courseId === course._id && course.professor === req.user.uid) {
+	// Grant access
+}
+```
+
+Combining all of these checks results in the following code:
+```typescript
+if (req.user.role === "student" && req.user.uid === comment.userId ) {
+	// Grant access
+} else if (req.user.role === "professor" && course.professor === req.user.uid && comment.courseId == course._id) {
+	// Grant access
+} else if (req.user.role === "admin") {
+	// Grant access
+}
+```
+which isn't that bad honestly. 
+
+But we do have to repeat this permission check many times over the multiple controllers that we have. For example, we pretty much repeat this code in our controller which handles editing and deletion of posts as well as editing of comments. 
+
+Deleting Post:
+```typescript
+if (req.user.role === "student" && req.user.uid === post.userId ) {
+	// Grant access
+} else if (req.user.role === "professor" && course.professor === req.user.uid && comment.courseId == course._id) {
+	// Grant access
+} else if (req.user.role === "admin") {
+	// Grant access
+}
+```
+
+This gets old quickly. On top of that, what if we further increase our logic complexity in the future? Not only will the conditionals become more convoluted, we will also have to update this across each controller. 
+
+Introducing RBAC which stands for **Role Based Access Control**
+...
