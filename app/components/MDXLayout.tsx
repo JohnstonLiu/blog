@@ -3,9 +3,9 @@ import { ReactNode } from 'react'
 interface MDXLayoutProps {
   children: ReactNode
   frontMatter: {
-    title: string
-    description: string
-    date: string
+    title?: string
+    description?: string
+    date?: string
   }
 }
 
